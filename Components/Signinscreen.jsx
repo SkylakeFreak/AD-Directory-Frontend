@@ -48,7 +48,8 @@ function Signinscreen({mainscreentext,status}) {
         {/* <input onChange={(e)=>{
           setpassword(e.target.value)
         }} placeholder='Password' className={`outline ${!glow ? 'hidden' : ''}  p-1 outline-1 text-center`} type="password" /> */}
-        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''}  mt-5`} value={organizationname+masteradminaccountname+"signin"} />
+        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  mt-5`} value={organizationname+"+"+masteradminaccountname+"+"+"signin"} />
+        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={neworganizationname+"+"+newmasteradminaccountname+"+"+"signup"} />
 
         <p className={`${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Login!</p>
         <p className={`${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Signup!</p>
