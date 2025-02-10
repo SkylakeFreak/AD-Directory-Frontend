@@ -1,7 +1,7 @@
 "use client";
 import React from 'react'
 import AD from './AD'
-import { useState } from 'react'
+import { useState,useRef } from 'react'
 function Mainpage() {
   const [orgname,setorgname]=useState("");
   const [username,setusername]=useState("");
