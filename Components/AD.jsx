@@ -30,8 +30,12 @@ function AD({orgname,setorgname,setusername,username}) {
         if (orgname !== "" && username !== "") {
           const response = await handleSubmit(); 
     
-          if (response.status === 200) { 
+          if (response.ok==true) { 
+            console.log("will login the user")
+            // login the user
           } else {
+            console.log("Invalid details")
+            //pop up of invalid details
           }
         } else {
           console.log("Called but Not Entered Value");
@@ -53,10 +57,11 @@ function AD({orgname,setorgname,setusername,username}) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
+          credentials:"include",
         });
   
         const result = await response.json();
-        console.log(response.ok,response,"out")
+        console.log(result.message,"out")
   
         if (response.ok) {
           return response
