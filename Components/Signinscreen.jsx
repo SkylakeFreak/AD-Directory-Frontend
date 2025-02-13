@@ -5,7 +5,7 @@ import {QRCodeSVG} from 'qrcode.react';
 
 
 
-function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername}) {
+function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft}) {
   const[passwordstring,setpasswordstring]=useState("");
   const[organizationname,setorganizationname]=useState("");
   const[neworganizationname,setneworganizationname]=useState("");
@@ -16,8 +16,9 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
   const [signinupmode,setsigninupmode]=useState(false);
   
   
-  const [glow,setglow]=useState(false);
+  const [glow,setglow]=useState(true);
   return (
+    
     <div onMouseLeave={()=>{
       setglow(false)
     }} onMouseEnter={()=>{
@@ -25,7 +26,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
 
     }}  className={`flex transition-all shadow-2xl duration-75 p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-white text-xl' : 'bg-gray-200 text-lg'} ${glow ? 'h-[520px] ' : ''}   items-center h-[500px] w-[400px] outline outline-1`}>
         <p className={`${!glow ? ' flex items-center justify-center h-full text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
-        <p>Connection: {connectionstring}</p>
+        <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''}   ${!glow ? 'hidden' : ''}`}>Unique Session ID: {connectionstring}</p>
         
         <div className='h-full flex flex-col gap-2 items-center justify-center'>
 
