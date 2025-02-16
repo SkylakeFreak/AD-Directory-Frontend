@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 function Loggedinscreen({ }) {
   const router = useRouter();
   const [loggedintime, setloggedintime] = useState("Loading...");
+  const [currentuser,setcurrentuser]=useState("loading...")
+  const [currentorg,setcurrentorg]=useState("loading...")
   const [autologouttime, setautologouttime] = useState("Loading...");
   const [currentsystemtiming, setcurrentsystemtiming] = useState("Loading...");
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -23,6 +25,8 @@ function Loggedinscreen({ }) {
           setIsAuthenticated(true);
           setloggedintime(new Date(result.ttl * 1000).toLocaleString());
           setautologouttime(new Date(result.exp * 1000).toLocaleString());
+          setcurrentorg(result.org)
+          setcurrentuser(result.name)
         } else {
           setIsAuthenticated(false);
           router.push("/");
@@ -37,7 +41,6 @@ function Loggedinscreen({ }) {
     handleSubmit();
   }, [router]);
 
-  // ✅ Set system time only inside useEffect
   useEffect(() => {
     const updateTime = () => {
       const now = new Date().toLocaleString("en-US", {
@@ -63,11 +66,22 @@ function Loggedinscreen({ }) {
   }
 
   return (
-    <div>
-      <p>Welcome User!</p>
-      <p>Logged in At: {loggedintime}</p>
+    <div className='flex flex-row'>
+      <div className='flex flex-col w-full text-xl m-2 p-1'>
+      <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
+      <p>Your Organisation: <span className='font-bold capitalize '>{currentorg }</span></p> 
+      <p></p>
+
+      </div>
+      
+      <div className='flex flex-col w-full items-end'> 
+        <div className='m-2 p-1 outline outline-2'>
+        <p className="">Logged in At: {loggedintime}</p>
       <p>Auto-log Out At: {autologouttime}</p>
       <p>System Timing: {currentsystemtiming}</p>
+        </div>
+     </div>
+     
     </div>
   );
 }
