@@ -7,12 +7,12 @@ import Overlay from "@/Components/Overlay";
 export default function Home() {
   const [signedinnotification,setsignedinnotification]=useState(false);
   return (
-    <div className="relative w-full">
+    <div className="relative">
       <div className="absolute w-full transition-all duration-75 opacity-80 top-0 left-0">
       <Overlay setsignedinnotification={setsignedinnotification} signedinnotification={signedinnotification}/>
       </div>
 
-      <div className="absolute top-0 left-0">
+      <div className="absolute w-full top-0 left-0">
       <Mainpage singnedinnotification={signedinnotification} setsignedinnotification={setsignedinnotification}/>
       </div>
       

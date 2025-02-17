@@ -3,7 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import Signinscreen from "../pages/Signinscreen";
 import { useRouter } from "next/navigation";
 
-function AD({ orgname, setorgname, setusername, username, tenantname,settenantname,domainname,setdomainname,connectionstring,setconnectionstring,setsigninupmode,signinupmode,signedinnotification,setsignedinnotification,settriggerconnectionstring,triggerconenctionstring }) {
+function AD({ orgname, setorgname, setusername, username, tenantname,settenantname,domainname,setdomainname,connectionstring,
+    setconnectionstring,setsigninupmode,signinupmode,signedinnotification,setsignedinnotification,settriggerconnectionstring,triggerconenctionstring }) {
   const router = useRouter();
   const pendingtimeleft = useRef(3);
   const intervalRef = useRef(null);
@@ -89,7 +90,8 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
   }, [orgname, username,tenantname,settenantname]);
 
   const handleSubmit = async () => {
-    const data = { orgname, username, connectionstring };
+    const modifiedUsername = username.includes("@AD.com") ? username : username + "@AD.com";
+  const data = { orgname, username: modifiedUsername, connectionstring };
 
     try {
       const response = await fetch("https://ad-api-backend.vercel.app/frontendfetch", {
