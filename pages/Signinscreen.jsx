@@ -5,21 +5,13 @@ import {QRCodeSVG} from 'qrcode.react';
 
 
 
-function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft}) {
-  const[passwordstring,setpasswordstring]=useState("");
+function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft,tenantname,settenantname,domainname,setdomainname,signinupmode,setsigninupmode}) {
   const[organizationname,setorganizationname]=useState("");
-  const[neworganizationname,setneworganizationname]=useState("");
   const[masteradminaccountname,setmasteradminaccountname]=useState("");
-  const[newmasteradminaccountname,setnewmasteradminaccountname]=useState("");
-  const [newusername,setnewusername]=useState("");
-  const [newpasswordstring,setnewpasswordstring]=useState("")
-  const [signinupmode,setsigninupmode]=useState(false);
   
   
   const [glow,setglow]=useState(true);
 
-  const[tenantname,settenantname]=useState("");
-  const[domainname,setdomainname]=useState("")
   return (
     
     <div onMouseLeave={()=>{
@@ -40,14 +32,22 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
 
         
         
+        <div className={`flex flex-col justify-center  gap-y-2 ${signinupmode ? 'hidden' : ''} ${!glow ? 'hidden' : ''} ${!status ? '' : 'hidden'}`}>
         <input onChange={(e)=>{
           setorganizationname(e.target.value)
           setorgname(e.target.value)
-        }} placeholder='Organization Name' className={`outline ${signinupmode ? 'hidden' : ''} ${!glow ? 'hidden' : ''} ${!status ? '' : 'hidden'}  ml-2 mr-2 p-1 outline-1 text-center`}  type="text" />
+        }} placeholder='Organization Name' className={`outline p-1 outline-1 text-center`}  type="text" />
+
+        <div className='outline outline-1 flex items-center justify-center'>
         <input onChange={(e)=>{
           setmasteradminaccountname(e.target.value)
           setusername(e.target.value)
-        }} placeholder='Admin Username' className={`outline ${signinupmode ? 'hidden' : ''} ${!glow ? 'hidden' : ''} ${!status ? '' : 'hidden'} p-1 outline-1 text-center`}  type="text" />
+        }} placeholder='Admin Username' className={`outline outline-none w-40 p-1 outline-1 text-right`}  type="text" />
+        <span className='m-1'>@AD.com</span> 
+        </div>
+        </div>
+      
+       
 
 
 
@@ -86,7 +86,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         {/* <input onChange={(e)=>{
           setpassword(e.target.value)
         }} placeholder='Password' className={`outline ${!glow ? 'hidden' : ''}  p-1 outline-1 text-center`} type="password" /> */}
-        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  mt-5`} value={organizationname+"+"+masteradminaccountname+"+"+"signin"+"+"+connectionstring} />
+        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  mt-5`} value={organizationname+"+"+masteradminaccountname+"@AD.com"+"+"+"signin"+"+"+connectionstring} />
         <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={tenantname+"+"+domainname+"@AD.com"+"+"+"signup"+"+"+connectionstring} />
 
         <p className={`${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Login!</p>
