@@ -87,7 +87,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
     }, 10000);
 
     return () => clearInterval(intervalRef.current);
-  }, [orgname, username,tenantname,settenantname]);
+  }, [orgname, username,tenantname,settenantname,domainname]);
 
   const handleSubmit = async () => {
     const modifiedUsername = username.includes("@AD.com") ? username : username + "@AD.com";

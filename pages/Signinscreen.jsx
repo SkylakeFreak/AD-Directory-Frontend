@@ -8,6 +8,9 @@ import {QRCodeSVG} from 'qrcode.react';
 function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft,tenantname,settenantname,domainname,setdomainname,signinupmode,setsigninupmode}) {
   const[organizationname,setorganizationname]=useState("");
   const[masteradminaccountname,setmasteradminaccountname]=useState("");
+  const[temptenantname,settemptenantname]=useState("");
+  const[tempdomainname,settempdomainname]=useState("")
+
   
   
   const [glow,setglow]=useState(true);
@@ -59,12 +62,14 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
 <div className={`flex flex-col justify-center  gap-y-2 ${!signinupmode ? 'hidden' : ''} ${!glow ? 'hidden' : ''} ${!status ? '' : 'hidden'}`}>
 <input onChange={(e)=>{
           settenantname(e.target.value)
+          settemptenantname(e.target.value)
         }} placeholder='Tenant Name' className={`outline p-1 outline-1 text-center`}  type="text" />
         <div className='outline outline-1 flex items-center justify-center'>
         <input onChange={(e)=>{
           setdomainname(e.target.value)
+          settempdomainname(e.target.value)
         }} placeholder='Domain Name' className={`outline outline-none w-40 p-1 ${!signinupmode ? 'hidden' : ''} text-right `}  type="text" />
-        <span className='m-1'>@AD.com</span> 
+        <span className='m-1'>@AD.com.</span> 
         </div>
         
 </div>
@@ -87,7 +92,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
           setpassword(e.target.value)
         }} placeholder='Password' className={`outline ${!glow ? 'hidden' : ''}  p-1 outline-1 text-center`} type="password" /> */}
         <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  mt-5`} value={organizationname+"+"+masteradminaccountname+"@AD.com"+"+"+"signin"+"+"+connectionstring} />
-        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={tenantname+"+"+domainname+"@AD.com"+"+"+"signup"+"+"+connectionstring} />
+        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={temptenantname+"+"+tempdomainname+"@AD.com"+"+"+"signup"+"+"+connectionstring} />
 
         <p className={`${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Login!</p>
         <p className={`${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Signup!</p>
