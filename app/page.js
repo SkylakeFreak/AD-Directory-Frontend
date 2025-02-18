@@ -8,8 +8,12 @@ export default function Home() {
   const [signedinnotification,setsignedinnotification]=useState(false);
   return (
     <div className="relative">
-      <div className="absolute w-full transition-all duration-75 opacity-80 top-0 left-0">
-      <Overlay setsignedinnotification={setsignedinnotification} signedinnotification={signedinnotification}/>
+      <div className="absolute flex w-full items-center justify-center transition-all duration-75 opacity-80">
+        <div className="p-10 w-80 text-lg">
+        <Overlay setsignedinnotification={setsignedinnotification} signedinnotification={signedinnotification}/>
+
+        </div>
+      
       </div>
 
       <div className="absolute w-full top-0 left-0">

@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Signinscreen from "../pages/Signinscreen";
 import { useRouter } from "next/navigation";
+import img from "@/asset/loader.gif"
+import Image from 'next/image';
 
 function AD({ orgname, setorgname, setusername, username, tenantname,settenantname,domainname,setdomainname,connectionstring,
     setconnectionstring,setsigninupmode,signinupmode,signedinnotification,setsignedinnotification,settriggerconnectionstring,triggerconenctionstring }) {
@@ -137,8 +139,18 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
   return (
     <div className="h-screen flex-col justify-center w-full flex">
-      <p className="flex text-2xl items-center w-full animate-pulse p-5">Active Directory</p>
+      <div className="flex flex-row"> <p className="flex text-2xl items-center w-full animate-pulse p-5">Active Directory</p>
+
+      <div className="flex items-center justify-center w-full flex-row">
+        <p className="text-xl">Server Listening...</p>
+      <Image className="h-[150px] w-[230px] " src={img} alt=""/>
+      </div>
+      
+      
+      </div>
+     
       <div className="flex items-center p-5 justify-center h-full gap-x-10 w-full">
+         
         <Signinscreen
           mainscreentext={"Organization AD"}
           connectionstring={connectionstring || "Generating..."}

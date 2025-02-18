@@ -5,7 +5,8 @@ import {QRCodeSVG} from 'qrcode.react';
 
 
 
-function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft,tenantname,settenantname,domainname,setdomainname,signinupmode,setsigninupmode}) {
+function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft,
+  tenantname,settenantname,domainname,setdomainname,signinupmode,setsigninupmode}) {
   const[organizationname,setorganizationname]=useState("");
   const[masteradminaccountname,setmasteradminaccountname]=useState("");
   const[temptenantname,settemptenantname]=useState("");
@@ -31,6 +32,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         <div className='h-full flex flex-col gap-2 items-center justify-center'>
 
         <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''}   ${!glow ? 'hidden' : ''}`}>Sign in</p>
+      
         <p className={`${!status ? '' : 'hidden'} font-semibold ${!signinupmode ? 'hidden' : ''}  ${!glow ? 'hidden' : ''}`}>Sign Up</p>
 
         
