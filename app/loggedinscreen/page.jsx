@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useRouter } from "next/navigation";
 import {QRCodeSVG} from 'qrcode.react';
 
@@ -13,6 +13,10 @@ function Loggedinscreen({ }) {
   const [currentsystemtiming, setcurrentsystemtiming] = useState("Loading...");
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [logoutpopup,setlogoutpopup]=useState(false);
+  const [logoutredgreenstatus,setlogoutredgreenstatus]=useState("");
+  const intervalRef = useRef(null);
+
+  
 
   useEffect(() => {
     const handleSubmit = async () => {
@@ -65,6 +69,43 @@ function Loggedinscreen({ }) {
   }, []);
 
 
+  const clearcookie=async()=>{
+    if (logoutredgreenstatus!=="" && !logoutredgreenstatus){
+      const response = await fetch("https://ad-api-backend.vercel.app/clearthecookie", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const result = await response.json();
+      if (response.status==200){
+        console.log("cleared the cookie sucessfully")
+        router.push("/");
+
+      }
+      else{
+        console.log("Some error occured")
+        setlogoutredgreenstatus(false)
+        
+      }
+      console.log(result.message)
+
+      return
+
+    }
+    const response = await fetch("https://ad-api-backend.vercel.app/verifyuserstatusredgreen", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    const result = await response.json();
+    console.log(result.message,"test")
+    setlogoutredgreenstatus(result.message)
+  }
+
+
+
+
+
 
   if (isAuthenticated === null) {
     return <div>Loading...</div>;
@@ -109,10 +150,13 @@ function Loggedinscreen({ }) {
         </div>
       
         <QRCodeSVG className='outline outline-2' value={currentorg+"+"+currentuser+"+"+"logout"+"+"+"EMPTYPAYLOAD"} />
-      <button className='h-10 p-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout</button>
+      <button onClick={()=>{
+        clearcookie();
+      }} className='h-10 p-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout</button>
       <div className='gap-1 flex flex-col items-center justify-center'>
-      <p className='text-red-500'>Not Scanned the QR</p>
-      <p className='text-green-500'>Please Wait..</p>
+      {logoutredgreenstatus==="" && !logoutredgreenstatus&&<p className='text-black-500'>Please Scan the QR</p>}
+      {logoutredgreenstatus!=="" && logoutredgreenstatus&&<p className='text-red-500'>Not Scanned the QR</p>}
+      {logoutredgreenstatus!==""&& !logoutredgreenstatus&&<p className='text-green-500'>Please Wait..</p>}
       </div>
       
 
