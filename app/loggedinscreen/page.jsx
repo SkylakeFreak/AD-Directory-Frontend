@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+import {QRCodeSVG} from 'qrcode.react';
 
 function Loggedinscreen({ }) {
+  const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
   const [loggedintime, setloggedintime] = useState("Loading...");
   const [currentuser,setcurrentuser]=useState("loading...")
@@ -10,6 +12,7 @@ function Loggedinscreen({ }) {
   const [autologouttime, setautologouttime] = useState("Loading...");
   const [currentsystemtiming, setcurrentsystemtiming] = useState("Loading...");
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [logoutpopup,setlogoutpopup]=useState(false);
 
   useEffect(() => {
     const handleSubmit = async () => {
@@ -66,7 +69,7 @@ function Loggedinscreen({ }) {
   }
 
   return (
-    <div className='flex flex-row'>
+    <div className='flex relative flex-row'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
       <p>Your Organisation: <span className='font-bold capitalize '>{currentorg }</span></p> 
@@ -80,7 +83,40 @@ function Loggedinscreen({ }) {
       <p>Auto-log Out At: {autologouttime}</p>
       <p>System Timing: {currentsystemtiming}</p>
         </div>
+        <button onClick={()=>{
+          setlogoutpopup(true)
+
+        }} className='h-10 p-2 m-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout Authentication</button>
      </div>
+
+
+
+     
+
+
+     {logoutpopup && <div className='absolute w-full transition-all duration-100 flex items-center justify-center mt-40'>
+      
+      <div className='bg-gray-200 flex flex-col gap-5 items-center justify-center w-80 h-80'>
+        <div className='flex items-center w-80 p-1   absolute top-0 justify-end'>
+        <button className='outline outline-1 p-1 m-1 hover:bg-gray-300' onClick={()=>{
+        setlogoutpopup(false)
+      }}>Cancel</button>
+        </div>
+      
+        <QRCodeSVG className='outline outline-2' />
+      <button className='h-10 p-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout</button>
+      <div className='gap-1 flex flex-col items-center justify-center'>
+      <p className='text-red-500'>Not Scanned the QR</p>
+      <p className='text-green-500'>Please Wait..</p>
+      </div>
+      
+
+      </div>
+    
+      
+     </div>}
+
+     
      
     </div>
   );
