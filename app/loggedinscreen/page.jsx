@@ -64,9 +64,14 @@ function Loggedinscreen({ }) {
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
+
+
   if (isAuthenticated === null) {
     return <div>Loading...</div>;
   }
+
+
+  
 
   return (
     <div className='flex relative flex-row'>
@@ -103,7 +108,7 @@ function Loggedinscreen({ }) {
       }}>Cancel</button>
         </div>
       
-        <QRCodeSVG className='outline outline-2' />
+        <QRCodeSVG className='outline outline-2' value={currentorg+"+"+currentuser+"+"+"logout"+"+"+"EMPTYPAYLOAD"} />
       <button className='h-10 p-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout</button>
       <div className='gap-1 flex flex-col items-center justify-center'>
       <p className='text-red-500'>Not Scanned the QR</p>
