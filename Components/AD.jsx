@@ -6,7 +6,9 @@ import img from "@/asset/loader.gif"
 import Image from 'next/image';
 
 function AD({ orgname, setorgname, setusername, username, tenantname,settenantname,domainname,setdomainname,connectionstring,
-    setconnectionstring,setsigninupmode,signinupmode,signedinnotification,setsignedinnotification,settriggerconnectionstring,triggerconenctionstring }) {
+    setconnectionstring,setsigninupmode,signinupmode,
+    signedinnotification,setsignedinnotification,settriggerconnectionstring,
+    triggerconenctionstring }) {
   const router = useRouter();
   const pendingtimeleft = useRef(3);
   const intervalRef = useRef(null);
@@ -139,12 +141,12 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
   return (
     <div className="h-screen flex-col justify-center w-full flex">
-      <div className="flex flex-row"> <p className="flex text-2xl items-center w-full animate-pulse p-5">Active Directory</p>
+      <div className="flex flex-row"> <p className="flex text-2xl items-center w-full p-5">Active Directory</p>
 
-      <div className="flex items-center justify-center w-full flex-row">
+      {/* <div className="flex items-center justify-center w-full flex-row">
         <p className="text-xl">Server Listening...</p>
       <Image className="h-[150px] w-[230px] " src={img} alt=""/>
-      </div>
+      </div> */}
       
       
       </div>

@@ -70,14 +70,22 @@ function Loggedinscreen({ }) {
 
 
   const clearcookie=async()=>{
-    if (logoutredgreenstatus!=="" && !logoutredgreenstatus){
+    const response = await fetch("https://ad-api-backend.vercel.app/verifyuserstatusredgreen", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    const result = await response.json();
+    console.log(result.message,"test")
+    setlogoutredgreenstatus(result.message)
+    if (logoutredgreenstatus!=="" && !result.message){
       const response = await fetch("https://ad-api-backend.vercel.app/clearthecookie", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
       const result = await response.json();
-      if (response.status==200){
+      if (result.message==true){
         console.log("cleared the cookie sucessfully")
         router.push("/");
 
@@ -87,19 +95,9 @@ function Loggedinscreen({ }) {
         setlogoutredgreenstatus(false)
         
       }
-      console.log(result.message)
-
       return
 
     }
-    const response = await fetch("https://ad-api-backend.vercel.app/verifyuserstatusredgreen", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const result = await response.json();
-    console.log(result.message,"test")
-    setlogoutredgreenstatus(result.message)
   }
 
 
