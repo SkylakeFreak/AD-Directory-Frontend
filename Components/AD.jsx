@@ -88,7 +88,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
         console.log("Called but Not Entered Value");
         console.log(triggerconenctionstring,"triggerconnectionstring")
       }
-    }, 10000);
+    }, 3000);
 
     return () => clearInterval(intervalRef.current);
   }, [orgname, username,tenantname,settenantname,domainname]);

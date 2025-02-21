@@ -106,7 +106,7 @@ function Loggedinscreen({ }) {
 
 
   if (isAuthenticated === null) {
-    return <div>Loading...</div>;
+    return <div>Loading..</div>;
   }
 
 
