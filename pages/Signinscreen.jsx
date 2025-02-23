@@ -24,7 +24,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
     }} onMouseEnter={()=>{
       setglow(true)
 
-    }}  className={`flex transition-all shadow-2xl duration-75 w-full max-w-[24vw] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-white bg-opacity-30 text-xl' : 'bg-gray-200 bg-opacity-50  min-h-[50vh] text-lg'} ${glow ? 'h-auto min-h-[50vh] ' : ''}   items-center h-[500px] w-[400px] outline outline-1`}>
+    }}  className={`flex transition-all shadow-2xl duration-75 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-white bg-opacity-30 text-xl' : 'bg-gray-200 bg-opacity-60 w-full  min-h-[50vh] text-lg'} ${glow ? 'h-auto min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
         <p className={`${!glow ? ' flex items-center justify-center h-full text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
         <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''} text-sm  ${!glow ? 'hidden' : ''}`}>Unique Session ID: <span className='font-bold uppercase text-sm'>{connectionstring}</span></p>
 
