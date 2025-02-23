@@ -82,6 +82,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
           <option value="User">User</option>
           <option value="Manager">Manager</option>
             <option value="Orgnanization-Admin">Organization Admin</option>
+
             <option value="Super-Admin">SUPER ADMIN</option>
             
           </select>
