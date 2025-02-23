@@ -24,7 +24,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
     }} onMouseEnter={()=>{
       setglow(true)
 
-    }}  className={`flex transition-all shadow-2xl duration-75 p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-white text-xl' : 'bg-gray-200 min-h-[540px] text-lg'} ${glow ? 'h-auto min-h-[540px] ' : ''}   items-center h-[500px] w-[400px] outline outline-1`}>
+    }}  className={`flex transition-all shadow-2xl duration-75 w-full max-w-[24vw] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-white bg-opacity-30 text-xl' : 'bg-gray-200 bg-opacity-50  min-h-[50vh] text-lg'} ${glow ? 'h-auto min-h-[50vh] ' : ''}   items-center h-[500px] w-[400px] outline outline-1`}>
         <p className={`${!glow ? ' flex items-center justify-center h-full text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
         <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''} text-sm  ${!glow ? 'hidden' : ''}`}>Unique Session ID: <span className='font-bold uppercase text-sm'>{connectionstring}</span></p>
 
@@ -42,14 +42,14 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         <input onChange={(e)=>{
           setorganizationname(e.target.value)
           setorgname(e.target.value)
-        }} placeholder='Organization Name' className={`outline p-1 outline-1 text-center`}  type="text" />
+        }} placeholder='Organization Name' className={`outline p-1 placeholder:text-gray-200 text-white outline-1 outline-black bg-white bg-opacity-10 text-center`}  type="text" />
 
         <div className='outline outline-1 flex items-center justify-center'>
         <input onChange={(e)=>{
           setmasteradminaccountname(e.target.value)
           setusername(e.target.value)
-        }} placeholder='Admin Username' className={`outline outline-none w-40 p-1 outline-1 text-right`}  type="text" />
-        <span className='m-1'>@AD.com</span> 
+        }} placeholder='Admin Username' className={`outline outline-none placeholder:text-gray-200 text-white bg-white bg-opacity-10 w-40 p-1 outline-1 text-right`}  type="text" />
+        <span cl className='m-1 placeholder:text-gray-200 text-white'>@AD.com</span> 
         </div>
         </div>
       
@@ -78,7 +78,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
 </div>
 <div className={`flex ${!glow ? 'hidden' : ''} gap-2 flex-col  items-center outline w-full p-2 outline-1 justify-center ${signinupmode ? 'hidden' : ''}`}>
   <p>Login As</p>
-          <select onChange={(e) => setSelected(e.target.value)} value={selected} className='rounded outline outline-1 outline-gray-400  cursor-pointer p-1' name="" id="">
+          <select onChange={(e) => setSelected(e.target.value)} value={selected} className='rounded bg-white bg-opacity-10 outline outline-1 outline-gray-400  cursor-pointer p-1' name="" id="">
           <option value="User">User</option>
           <option value="Manager">Manager</option>
             <option value="Orgnanization-Admin">Organization Admin</option>

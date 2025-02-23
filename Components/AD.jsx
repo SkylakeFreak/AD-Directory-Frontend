@@ -171,7 +171,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
           setsignedinnotification={setsignedinnotification}
           signedinnotification={signedinnotification}
         />
-        <Signinscreen mainscreentext={"User AD"} status={true} />
+        {/* <Signinscreen mainscreentext={"User AD"} status={true} /> */}
       </div>
     </div>
   );
