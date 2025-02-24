@@ -68,38 +68,43 @@ function Loggedinscreen({ }) {
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
-
-  const clearcookie=async()=>{
-    const response = await fetch("https://ad-api-backend.vercel.app/verifyuserstatusredgreen", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const result = await response.json();
-    console.log(result.message,"test")
-    setlogoutredgreenstatus(result.message)
-    if (logoutredgreenstatus!=="" && !result.message){
-      const response = await fetch("https://ad-api-backend.vercel.app/clearthecookie", {
+  const clearcookie = async () => {
+    try {
+      // First request to verify user status
+      const response1 = await fetch("https://ad-api-backend.vercel.app/verifyuserstatusredgreen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-      const result = await response.json();
-      if (result.message==true){
-        console.log("cleared the cookie sucessfully")
-        router.push("/");
-
+  
+      const result1 = await response1.json();
+      console.log(result1.message, "test");
+  
+      setlogoutredgreenstatus(result1.message);
+  
+      // Use result1.message directly instead of logoutredgreenstatus
+      if (result1.message !== "" && !result1.message) {
+        const response2 = await fetch("https://ad-api-backend.vercel.app/clearthecookie", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+  
+        const result2 = await response2.json();
+  
+        if (result2.message === true) {
+          console.log("Cleared the cookie successfully");
+          router.push("/");
+        } else {
+          console.log("Some error occurred");
+          setlogoutredgreenstatus(false);
+        }
       }
-      else{
-        console.log("Some error occured")
-        setlogoutredgreenstatus(false)
-        
-      }
-      return
-
+    } catch (error) {
+      console.error("Error in clearcookie function:", error);
     }
-  }
-
+  };
+  
 
 
 

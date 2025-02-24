@@ -16,11 +16,17 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    const generateRandomString = (length = 10) => {
-      console.log("NEW STRING CREATED")
-      return Math.random().toString(36).substring(2, 2 + length);
+    const generateRandomString = (length = 15) => {
+      console.log("NEW STRING CREATED");
+      let str = '';
+      while (str.length < length) {
+        str += Math.random().toString(36).substring(2);
+      }
+      return str.substring(0, length); // Trim to exact length
     };
+    
     setconnectionstring(generateRandomString());
+    
   }, [triggerconenctionstring]);
 
   useEffect(() => {
@@ -143,7 +149,8 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
   return (
     <div className="h-screen flex-col justify-center w-full flex">
-      <div className="flex flex-row"> <p className="flex text-3xl text-white items-center w-full p-5">Nimbus OneIdentity</p>
+      <div className="flex flex-row">
+         {/* <p className="flex text-3xl text-white items-center w-full p-5">Nimbus OneIdentity</p> */}
 
       {/* <div className="flex items-center justify-center w-full flex-row">
         <p className="text-xl">Server Listening...</p>
