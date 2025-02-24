@@ -10,9 +10,15 @@ function Mainpage({signedinnotification,setsignedinnotification}) {
     const [signinupmode,setsigninupmode]=useState(false);
      const [connectionstring, setconnectionstring] = useState(null);
      const [triggerconenctionstring,settriggerconnectionstring]=useState(false);
+     const [selected, setSelected] = useState("Select Your Access LEVEL");
   return (
     <div>
-        <AD orgname={orgname} setorgname={setorgname} username={username} setusername={setusername} tenantname={tenantname} settenantname={settenantname} domainname={domainname} setdomainname={setdomainname} connectionstring={connectionstring} setconnectionstring={setconnectionstring} signinupmode={signinupmode} setsigninupmode={setsigninupmode} signedinnotifcation={signedinnotification} setsignedinnotification={setsignedinnotification} triggerconenctionstring={triggerconenctionstring} settriggerconnectionstring={settriggerconnectionstring}/>
+        <AD orgname={orgname} setorgname={setorgname} username={username} setusername={setusername} tenantname={tenantname} settenantname={settenantname} domainname={domainname} setdomainname={setdomainname} connectionstring={connectionstring}
+         setconnectionstring={setconnectionstring} signinupmode={signinupmode} setsigninupmode={setsigninupmode}
+          signedinnotifcation={signedinnotification} setsignedinnotification={setsignedinnotification} 
+          triggerconenctionstring={triggerconenctionstring} settriggerconnectionstring={settriggerconnectionstring}
+          selected={selected} setSelected={setSelected}
+          />
     </div>
 
   )
