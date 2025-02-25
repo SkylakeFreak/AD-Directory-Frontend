@@ -11,6 +11,13 @@ export default function Home() {
   const [notificationArray, setNotificationArray] = useState([
 
   ]);
+  
+  useEffect(()=>{
+    if (notificationArray.length>5){
+      setNotificationArray((prev) => prev.slice(-2));
+    }
+
+  },[notificationArray])
 
   useEffect(()=>{
     if(signedinnotification){
@@ -65,7 +72,7 @@ export default function Home() {
       </div> */}
 
       <div className="absolute w-full top-0 left-0">
-      <Mainpage singnedinnotification={signedinnotification} setsignedinnotification={setsignedinnotification}/>
+      <Mainpage singnedinnotification={signedinnotification} setsignedinnotification={setsignedinnotification} setNotificationArray={setNotificationArray}/>
       </div>
       
     {/* <Sendtest/> */}

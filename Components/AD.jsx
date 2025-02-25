@@ -8,7 +8,7 @@ import Image from 'next/image';
 function AD({ orgname, setorgname, setusername, username, tenantname,settenantname,domainname,setdomainname,connectionstring,
     setconnectionstring,setsigninupmode,signinupmode,
     signedinnotification,setsignedinnotification,settriggerconnectionstring,
-    triggerconenctionstring,selected,setSelected
+    triggerconenctionstring,selected,setSelected,setNotificationArray
 
    }) {
   const router = useRouter();
@@ -17,12 +17,14 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
   useEffect(() => {
     const generateRandomString = (length = 15) => {
+      var currentime=new Date();
+      setNotificationArray((prev) => [...prev, "SYSTEM INITIATED  "+currentime]);
       console.log("NEW STRING CREATED");
       let str = '';
       while (str.length < length) {
         str += Math.random().toString(36).substring(2);
       }
-      return str.substring(0, length); // Trim to exact length
+      return str.substring(0, length);
     };
     
     setconnectionstring(generateRandomString());
@@ -40,6 +42,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
       try{
         console.log("called the frontendlogapi")
+
         const response = await fetch("https://ad-api-backend.vercel.app/frontendstatus", {
           method: "POST",
           headers: {
@@ -57,8 +60,11 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
           settriggerconnectionstring(!triggerconenctionstring);
           setsigninupmode(!signinupmode);
         }
+        var currentime=new Date();
+        setNotificationArray((prev) => [...prev, `${result.message}`+currentime]);
 
         console.log(result.message)
+        
       }
       catch(err){
         console.log("error fetching the frontendstatusapi"+err)
@@ -68,6 +74,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
     intervalRef.current = setInterval(async () => {
       console.log("setinterval called..",domainname+"@AD.com",tenantname,connectionstring)
+    
       if (domainname !== "" && tenantname !== "") {
         callthelogsapi();
       }
@@ -81,6 +88,8 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
             pendingtimeleft.current -= 1;
             if (pendingtimeleft.current === 0) {
               console.log("Will call cron job to delete the state");
+              const currentime=new Date();
+              setNotificationArray((prev) => [...prev, "Sucessfully Called the CRON Jobs to Logout!"+currentime]);
               cronjobs();
               clearInterval(intervalRef.current);
             }
@@ -90,7 +99,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
         }
       } else {
         setTimeout(() => {
-          setsignedinnotification(false);//turned off the loggged in notification
+          setsignedinnotification(false);
           
         }, 6000);
         console.log("Called but Not Entered Value");
@@ -116,11 +125,14 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
       });
 
       const result = await response.json();
+
       console.log(result.name,result.org, "out");
 
       if (response.status === 201) {
         console.log("Will login the user");
         console.log("Will Poll once again the user");
+        const currentime=new Date();
+        setNotificationArray((prev) => [...prev, "Found The USER WIll Reverify Please WAIT!"+currentime]);
         return response;
       } else if (response.status === 200) {
         clearInterval(intervalRef.current);
