@@ -7,7 +7,7 @@ import img2 from "@/asset/bgbg.jpg"
 import Overlay from "@/Components/Overlay";
 import logo from "@/asset/logo.png"
 export default function Home() {
-  const [signedinnotification,setsignedinnotification]=useState(true);
+  const [signedinnotification,setsignedinnotification]=useState(false);
   const [notificationArray, setNotificationArray] = useState([
 
   ]);
