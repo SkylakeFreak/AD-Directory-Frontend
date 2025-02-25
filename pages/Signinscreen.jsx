@@ -48,7 +48,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         <input onChange={(e)=>{
           setmasteradminaccountname(e.target.value)
           setusername(e.target.value)
-        }} placeholder='Admin Username' className={`bg-black outline outline-none text-white opacity-60 w-40 p-1 outline-1 text-right`}  type="text" />
+        }} placeholder='Username' className={`bg-black outline outline-none text-white opacity-60 w-40 p-1 outline-1 text-right`}  type="text" />
         <div className='flex p-1 items-center justify-center w-full h-full opacity-60 text-white bg-black'>
           <p>@AD.com</p>
         </div>
