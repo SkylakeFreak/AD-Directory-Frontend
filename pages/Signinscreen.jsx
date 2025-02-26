@@ -6,6 +6,7 @@ import fingerprintimage from "@/asset/fingerprintimage.jpg"
 import scanner from "@/asset/scanner.jpg"
 
 import Image from 'next/image';
+import crossbar from "@/asset/crossbar.png"
 
 
 function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname,username,setusername,pendingtimeleft,
@@ -27,8 +28,8 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
     }} onMouseEnter={()=>{
       setglow(true)
 
-    }}  className={`flex transition-all shadow-2xl duration-85 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-[#EEEEEE]  text-xl md:max-w-[40vh]' : 'bg-[#393E46] w-full text-white bg-opacity-85   outline outline-none  min-h-[50vh] text-lg'} ${glow ? 'h-auto  min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
-        <p className={`${!glow ? ' flex items-center justify-center h-full text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
+    }}  className={`flex transition-all shadow-2xl duration-85 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-[#EEEEEE]  text-xl md:max-w-[40vh]' : 'bg-[#181818] opacity-90 text-white w-full   outline outline-none  min-h-[50vh] text-lg'} ${glow ? 'h-auto  min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
+        <p className={`${!glow ? ' flex items-center justify-center h-full mt-10 mb-5 text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
         <div className={` ${glow ? 'hidden' : ''} flex gap-x-4 flex-row`}>
           <Image className='h-20 w-20' src={fingerprintimage} alt=""/>
           <Image className='h-20 w-20' src={scanner} alt=""/>
@@ -36,7 +37,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
       
 
         </div>
-        <div className={` ${glow ? 'hidden' : ''} items-center text-lg justify-center flex flex-col gap-10 mt-10`}>
+        <div className={` ${glow ? 'hidden' : ''} items-center relative text-lg  w-full flex flex-col gap-10  mt-10`}>
           <div className='flex items-center justify-center gap-2'>
           <p>Hover to Visible...</p>
           <img width="30" height="20" src="https://img.icons8.com/sf-black/100/FFFFFF/sun.png" alt="sun"/>
@@ -44,8 +45,9 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
           </div>
          
           <p>Until, You are in SAFE ZONE!</p>
-
+          <Image src={crossbar} className='absolute w-full' alt=''/>
         </div>
+        
        
         <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''} text-sm  ${!glow ? 'hidden' : ''}`}>Unique Session ID: <span className='font-bold uppercase text-sm'>{connectionstring}</span></p>
 

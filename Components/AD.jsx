@@ -18,7 +18,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
   useEffect(() => {
     const generateRandomString = (length = 15) => {
       var currentime=new Date();
-      setNotificationArray((prev) => [...prev, "SYSTEM INITIATED  "+currentime]);
+      setNotificationArray((prev) => [...prev, "SESSION ID GENERATED!  "+currentime]);
       console.log("NEW STRING CREATED");
       let str = '';
       while (str.length < length) {
