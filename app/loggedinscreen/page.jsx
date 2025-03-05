@@ -14,6 +14,7 @@ function Loggedinscreen({ }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [logoutpopup,setlogoutpopup]=useState(false);
   const [logoutredgreenstatus,setlogoutredgreenstatus]=useState("");
+  const [modeoflogin,setmodeoflogin]=useState("Loading...")
   const intervalRef = useRef(null);
 
   
@@ -34,6 +35,7 @@ function Loggedinscreen({ }) {
           setautologouttime(new Date(result.exp * 1000).toLocaleString());
           setcurrentorg(result.org)
           setcurrentuser(result.name)
+          setmodeoflogin(result.modeoflogin)
         } else {
           setIsAuthenticated(false);
           router.push("/");
@@ -122,6 +124,7 @@ function Loggedinscreen({ }) {
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
       <p>Your Organisation: <span className='font-bold capitalize '>{currentorg }</span></p> 
+      <p>Your Role: <span className='font-bold capitalize '>{modeoflogin }</span></p> 
       <p></p>
 
       </div>

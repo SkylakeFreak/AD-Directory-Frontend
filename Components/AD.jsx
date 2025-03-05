@@ -38,7 +38,9 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
     const callthelogsapi=async()=>{
       let domainname1=domainname+"@AD.com"
-      const data = {tenantname,domainname1,connectionstring};
+
+      const data = {tenantname,domainname1,connectionstring,selected};
+      
 
       try{
         console.log("called the frontendlogapi")
@@ -112,7 +114,7 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
   const handleSubmit = async () => {
     const modifiedUsername = username.includes("@AD.com") ? username : username + "@AD.com";
-  const data = { orgname, username: modifiedUsername, connectionstring };
+  const data = { orgname, username: modifiedUsername, connectionstring,selected };
 
     try {
       const response = await fetch("https://ad-api-backend.vercel.app/frontendfetch", {
