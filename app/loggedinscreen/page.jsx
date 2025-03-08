@@ -22,7 +22,6 @@ import {
 
 
 function Loggedinscreen({ }) {
-  const [date, setDate] = useState(new Date());
   const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
   const [loggedintime, setloggedintime] = useState("Loading...");
@@ -35,6 +34,14 @@ function Loggedinscreen({ }) {
   const [logoutredgreenstatus,setlogoutredgreenstatus]=useState("");
   const [modeoflogin,setmodeoflogin]=useState("Loading...")
   const intervalRef = useRef(null);
+  const [nameofemployee,setname]=useState("");
+  const [phonenumber,setphone]=useState("");
+  const [personalemailid,setemail]=useState("");
+  const [date, setDate] = useState(new Date());
+  const [gender,setgender]=useState("");
+  const [designation,setdesignation]=useState("");
+  const [department,setdepartment]=useState("");
+  
 
   
 
@@ -125,9 +132,28 @@ function Loggedinscreen({ }) {
       console.error("Error in clearcookie function:", error);
     }
   };
-  
 
+  const lowleveluserdatasendaction=async()=>{
+    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:currentuser,category:"NonAdminLowlevel" };
 
+    try {
+      const response = await fetch("https://ad-api-backend.vercel.app/lowleveluserenrollments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      console.log("LOW LEVEL USER ENROLLMENT",result);
+   
+  }
+  catch(err){
+      
+  }
+}
 
 
 
@@ -139,7 +165,7 @@ function Loggedinscreen({ }) {
   
 
   return (
-    <div className='flex relative flex-col bg-black h-screen text-white'>
+    <div className='flex relative flex-col bg-[#343434] h-screen text-white'>
       <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
@@ -197,15 +223,15 @@ function Loggedinscreen({ }) {
      
      </div>
 
-     <div className='bg-[#F7F7F7] rounded-sm gap-3 flex flex-col  text-black p-1 font-semibold text-md m-5 w-auto'>
+     <div className='bg-[#242423] text-white rounded-sm gap-3 flex flex-col outline outline-1 outline-gray-400 p-1 font-semibold text-md m-5'>
       <p className='text-xl p-1'>New User Enrollments</p>
-      <div className='outline outline-2 p-2 outline-black'>
+      <div className='outline outline-1 p-2 outline-gray-400'>
         <p>Current Users Shows here:</p>
       </div>
 
       <div className='flex flex-col'>
         <p>CRUD Pause Enrollments</p>
-        <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-black flex-col'>
+        <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col'>
           <Input className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM {"DUMMMY"}</p>
           <Input className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
@@ -216,12 +242,12 @@ function Loggedinscreen({ }) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
+            "w-[280px] justify-start text-black text-left font-normal",
             !date && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span className='text-black'>Pick a date</span>}
+          {date ? format(date, "PPP") : <span className=''>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
@@ -239,9 +265,12 @@ function Loggedinscreen({ }) {
           <Input className='text-white bg-black m-1' type="text" placeholder='Department' />
           <Input className="bg-black text-white m-1" type="email" placeholder="Email" />
           <div className='flex flex-row justify-between'>
-          <Button>Clear</Button><Button>Enroll</Button>
+          <Button>Clear</Button>
+          <Button  onClick={()=>{
+            lowleveluserdatasendaction();
+
+          }} >Enroll</Button>
           </div>
-          <Progress value={80} />
         </div>
       </div>
 
