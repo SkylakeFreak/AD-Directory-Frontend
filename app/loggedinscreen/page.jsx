@@ -232,10 +232,19 @@ function Loggedinscreen({ }) {
       <div className='flex flex-col'>
         <p>CRUD Pause Enrollments</p>
         <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col'>
-          <Input className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
+          <Input onChange={(e)=>{
+            nameofemployee(e.target.value)
+
+          }} className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM {"DUMMMY"}</p>
-          <Input className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
-          <Input className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
+          <Input onChange={(e)=>{
+            phonenumber(e.target.value)
+
+          }} className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
+          <Input onChange={(e)=>{
+            personalemailid(e.target.value)
+
+          }} className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
           <Popover>
             <p className='text-normal p-1'>DOB</p>
       <PopoverTrigger asChild>
@@ -259,11 +268,23 @@ function Loggedinscreen({ }) {
         />
       </PopoverContent>
     </Popover>
-          <Input className='text-white bg-black m-1' type="text" placeholder='Gender' />
+          <Input onChange={(e)=>{
+            setgender(e.target.value)
 
-          <Input className='text-white bg-black m-1' type="text" placeholder='Designation' />
-          <Input className='text-white bg-black m-1' type="text" placeholder='Department' />
-          <Input className="bg-black text-white m-1" type="email" placeholder="Email" />
+          }} className='text-white bg-black m-1' type="text" placeholder='Gender' />
+
+          <Input onChange={(e)=>{
+            setdesignation(e.target.value)
+
+          }} className='text-white bg-black m-1' type="text" placeholder='Designation' />
+          <Input onChange={(e)=>{
+            setdepartment(e.target.value)
+
+          }} className='text-white bg-black m-1' type="text" placeholder='Department' />
+          <Input onChange={(e)=>{
+            setemail(e.target.value)
+
+          }} className="bg-black text-white m-1" type="email" placeholder="Email" />
           <div className='flex flex-row justify-between'>
           <Button>Clear</Button>
           <Button  onClick={()=>{
