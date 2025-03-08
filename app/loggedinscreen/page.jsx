@@ -134,7 +134,8 @@ function Loggedinscreen({ }) {
   };
 
   const lowleveluserdatasendaction=async()=>{
-    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:currentuser,category:"NonAdminLowlevel" };
+    var tweakedname=nameofemployee+"@AD.com"
+    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,category:"NonAdminLowlevel" };
 
     try {
       const response = await fetch("https://ad-api-backend.vercel.app/lowleveluserenrollments", {
@@ -233,16 +234,16 @@ function Loggedinscreen({ }) {
         <p>CRUD Pause Enrollments</p>
         <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col'>
           <Input onChange={(e)=>{
-            nameofemployee(e.target.value)
+            setname(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM {"DUMMMY"}</p>
           <Input onChange={(e)=>{
-            phonenumber(e.target.value)
+            setphone(e.target.value)
 
           }} className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
           <Input onChange={(e)=>{
-            personalemailid(e.target.value)
+            setemail(e.target.value)
 
           }} className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
           <Popover>
