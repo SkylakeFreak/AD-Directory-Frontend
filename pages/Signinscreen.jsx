@@ -30,6 +30,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
 
     }}  className={`flex transition-all shadow-2xl duration-85 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-[#EEEEEE]  text-xl md:max-w-[40vh]' : 'bg-[#181818] opacity-90 text-white w-full   outline outline-none  min-h-[50vh] text-lg'} ${glow ? 'h-auto  min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
         <p className={`${!glow ? ' flex items-center justify-center h-full mt-10 mb-5 text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
+        
         <div className={` ${glow ? 'hidden' : ''} flex gap-x-4 flex-row`}>
           <Image className='h-20 w-20' src={fingerprintimage} alt=""/>
           <Image className='h-20 w-20' src={scanner} alt=""/>
@@ -58,6 +59,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         <p className={`${!status ? '' : 'hidden'} font-semibold ${signinupmode ? 'hidden' : ''}   ${!glow ? 'hidden' : ''}`}>Sign in</p>
       
         <p className={`${!status ? '' : 'hidden'} font-semibold ${!signinupmode ? 'hidden' : ''}  ${!glow ? 'hidden' : ''}`}>Sign Up</p>
+        <p className={`${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  text-md font-semibold`}>Organization Admin</p>
 
         
         
@@ -107,7 +109,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
           <select onChange={(e) => setSelected(e.target.value)} value={selected} className='rounded bg-black text-white bg-opacity-60 outline outline-1 outline-gray-400  cursor-pointer p-1' name="" id="">
           <option value="User">User</option>
           <option value="Manager">Manager</option>
-            <option value="Orgnanization-Admin">Organization Admin</option>
+            <option value="Orgadmin">Organization-Admin</option>
 
             <option value="admin">SUPER ADMIN</option>
             
@@ -133,10 +135,11 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
         }} placeholder='Password' className={`outline ${!glow ? 'hidden' : ''}  p-1 outline-1 text-center`} type="password" /> */}
         
         <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  mt-5`} value={organizationname+"+"+masteradminaccountname+"@AD.com"+"+"+"signin"+"+"+connectionstring+"+"+selected} />
-        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={temptenantname+"+"+tempdomainname+"@AD.com"+"+"+"signup"+"+"+connectionstring+"+"+"admin"} />
+        <QRCodeSVG className={`rounded-md ${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  mt-5`} value={temptenantname+"+"+tempdomainname+"@AD.com"+"+"+"signup"+"+"+connectionstring+"+"+"Orgadmin"} />
 
         <p className={`${!glow ? 'hidden' : ''} ${signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Login!</p>
         <p className={`${!glow ? 'hidden' : ''} ${!signinupmode ? 'hidden' : ''}  text-sm mt-5`}>Scan QR to Signup!</p>
+       
 
 
         <button className={`p-1 hover:bg-black opacity-80 ${!status ? '' : 'hidden'} rounded-sm ${signinupmode ? 'hidden' : ''} ${!glow ? 'hidden' : ''} text-sm bg-black bg-opacity-60 text-white w-40 mt-5`} onClick={()=>{

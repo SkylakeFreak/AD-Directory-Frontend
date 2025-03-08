@@ -38,8 +38,9 @@ function AD({ orgname, setorgname, setusername, username, tenantname,settenantna
 
     const callthelogsapi=async()=>{
       let domainname1=domainname+"@AD.com"
+      const tempselected="asd"
 
-      const data = {tenantname,domainname1,connectionstring,selected};
+      const data = {tenantname,domainname1,connectionstring,tempselected};
       
 
       try{

@@ -2,8 +2,27 @@
 import React, { useEffect, useState,useRef } from 'react';
 import { useRouter } from "next/navigation";
 import {QRCodeSVG} from 'qrcode.react';
+import { Input } from "@/components/ui/input"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
+
+ 
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+
+
 
 function Loggedinscreen({ }) {
+  const [date, setDate] = useState(new Date());
   const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
   const [loggedintime, setloggedintime] = useState("Loading...");
@@ -113,14 +132,15 @@ function Loggedinscreen({ }) {
 
 
   if (isAuthenticated === null) {
-    return <div>Loading..</div>;
+    return <div className='h-screen bg-black text-white'>Loading..</div>;
   }
 
 
   
 
   return (
-    <div className='flex relative flex-row'>
+    <div className='flex relative flex-col bg-black h-screen text-white'>
+      <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
       <p>Your Organisation: <span className='font-bold capitalize '>{currentorg }</span></p> 
@@ -140,6 +160,7 @@ function Loggedinscreen({ }) {
 
         }} className='h-10 p-2 m-2 hover:bg-black bg-gray-700 rounded-sm text-white'>Logout Authentication</button>
      </div>
+
 
 
 
@@ -171,8 +192,60 @@ function Loggedinscreen({ }) {
       
      </div>}
 
+   
+
      
-     
+     </div>
+
+     <div className='bg-[#F7F7F7] rounded-sm gap-3 flex flex-col  text-black p-1 font-semibold text-md m-5 w-auto'>
+      <p className='text-xl p-1'>New User Enrollments</p>
+      <div className='outline outline-2 p-2 outline-black'>
+        <p>Current Users Shows here:</p>
+      </div>
+
+      <div className='flex flex-col'>
+        <p>CRUD Pause Enrollments</p>
+        <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-black flex-col'>
+          <Input className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
+          <p className="font-normal text-center">EMAIL AUTOFORM {"DUMMMY"}</p>
+          <Input className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
+          <Input className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
+          <Popover>
+            <p className='text-normal p-1'>DOB</p>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[280px] justify-start text-left font-normal",
+            !date && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? format(date, "PPP") : <span className='text-black'>Pick a date</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+          <Input className='text-white bg-black m-1' type="text" placeholder='Gender' />
+
+          <Input className='text-white bg-black m-1' type="text" placeholder='Designation' />
+          <Input className='text-white bg-black m-1' type="text" placeholder='Department' />
+          <Input className="bg-black text-white m-1" type="email" placeholder="Email" />
+          <div className='flex flex-row justify-between'>
+          <Button>Clear</Button><Button>Enroll</Button>
+          </div>
+          <Progress value={80} />
+        </div>
+      </div>
+
+     </div>
     </div>
   );
 }
