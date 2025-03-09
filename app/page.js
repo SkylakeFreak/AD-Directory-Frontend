@@ -2,15 +2,14 @@
 import Image from "next/image";
 import Mainpage from "@/Components/Mainpage";
 import { useEffect, useState } from 'react'
+import loaderimage from "@/asset/loader.png"
 import Sendtest from "@/Components/Sendtest";
 import img2 from "@/asset/bgbg.jpg"
 import Overlay from "@/Components/Overlay";
 import logo from "@/asset/logo.png"
 export default function Home() {
   const [signedinnotification,setsignedinnotification]=useState(false);
-  const [notificationArray, setNotificationArray] = useState([
-
-  ]);
+  const [notificationArray, setNotificationArray] = useState([]);
   
   useEffect(()=>{
     if (notificationArray.length>5){
@@ -29,7 +28,29 @@ export default function Home() {
 
   },[signedinnotification])
   return (
-    <div className="relative h-screen">
+    <div className="relative bg-black h-screen">
+      <div className="h-screen flex items-center justify-center">
+      <div className="flex justify-center w-screen items-center h-screen bg-blue-500 animate-bg">
+      <div className="relative w-14 h-14">
+        {/* Background */}
+        <div className="absolute w-20 h-20 -ml-4 -mt-4 rounded-lg bg-blue-500 opacity-70 animate-bg"></div>
+
+        {/* Loader Circles */}
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-9 h-9 opacity-0 rotate-[225deg] animate-orbit"
+            style={{ animationDelay: `${i * 240}ms` }}
+          >
+            <div className="absolute w-1.5 h-1.5 rounded-full bg-white shadow-white shadow-md"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+
+      </div>
+      <div className="relative h-screen hidden">
       <Image className="absolute w-full h-full" src={img2} alt=""/>
       <div className="h-screen flex flex-col
        hover:bg-opacity-80 bg-black bg-opacity-70 absolute z-50 items-center w-[18vw]">
@@ -76,6 +97,9 @@ export default function Home() {
       </div>
       
     {/* <Sendtest/> */}
+      
+
+      </div>
       
 
     </div>

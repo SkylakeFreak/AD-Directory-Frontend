@@ -166,7 +166,7 @@ function Loggedinscreen({ }) {
   
 
   return (
-    <div className='flex relative flex-col bg-[#343434] h-screen text-white'>
+    <div className={`flex  ${isAuthenticated!==null ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
       <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
@@ -237,7 +237,7 @@ function Loggedinscreen({ }) {
             setname(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
-          <p className="font-normal text-center">EMAIL AUTOFORM {"DUMMMY"}</p>
+          <p className="font-normal text-center">EMAIL AUTOFORM: {nameofemployee+"@AD.com"}</p>
           <Input onChange={(e)=>{
             setphone(e.target.value)
 
@@ -282,10 +282,6 @@ function Loggedinscreen({ }) {
             setdepartment(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Department' />
-          <Input onChange={(e)=>{
-            setemail(e.target.value)
-
-          }} className="bg-black text-white m-1" type="email" placeholder="Email" />
           <div className='flex flex-row justify-between'>
           <Button>Clear</Button>
           <Button  onClick={()=>{
