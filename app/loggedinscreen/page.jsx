@@ -2,24 +2,7 @@
 import React, { useEffect, useState,useRef } from 'react';
 import { useRouter } from "next/navigation";
 import {QRCodeSVG} from 'qrcode.react';
-import { Input } from "@/components/ui/input"
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-import { Progress } from "@/components/ui/progress"
 import Loader from '@/pages/Loader';
-
- 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-
-
 
 
 function Loggedinscreen({ }) {
@@ -39,7 +22,7 @@ function Loggedinscreen({ }) {
   const [nameofemployee,setname]=useState("");
   const [phonenumber,setphone]=useState("");
   const [personalemailid,setemail]=useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const [gender,setgender]=useState("");
   const [designation,setdesignation]=useState("");
   const [department,setdepartment]=useState("");
@@ -162,18 +145,21 @@ function Loggedinscreen({ }) {
   //feeding fast for latency
   
 
-  useEffect(()=>{
-    if (isAuthenticated===null){
-      setfrmpage(false);
-    }
-    else{
-      setfrmpage(true);
-    }
-
-  },[isAuthenticated,currentuser])
-
 
 }
+useEffect(()=>{
+
+  if (currentuser=="loading..."){
+    setfrmpage(false);
+
+  }
+  else{
+    setfrmpage(true);
+  }
+  console.log("exe",currentuser)
+  
+
+},[currentuser])
 
 
 
@@ -181,9 +167,6 @@ function Loggedinscreen({ }) {
     return <div className='h-screen bg-black text-white'>
       <Loader/>
     </div>;
-
-
-
   }
 
 
@@ -191,7 +174,7 @@ function Loggedinscreen({ }) {
   
 
   return (
-    <div className={`flex  ${!frmpage ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
+    <div className={`flex  ${isAuthenticated===null ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
       <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
@@ -258,61 +241,42 @@ function Loggedinscreen({ }) {
       <div className='flex flex-col'>
         <p>CRUD Pause Enrollments</p>
         <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col'>
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
             setname(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM: {nameofemployee+"@AD.com"}</p>
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
             setphone(e.target.value)
 
           }} className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
             setemail(e.target.value)
 
           }} className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
-          <Popover>
-            <p className='text-normal p-1'>DOB</p>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-black text-left font-normal",
-            !date && "text-muted-foreground"
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span className=''>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
+            setDate(e.target.value)
+
+          }}   type="date" />
+          <input onChange={(e)=>{
             setgender(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Gender' />
 
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
             setdesignation(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Designation' />
-          <Input onChange={(e)=>{
+          <input onChange={(e)=>{
             setdepartment(e.target.value)
 
           }} className='text-white bg-black m-1' type="text" placeholder='Department' />
           <div className='flex flex-row justify-between'>
-          <Button>Clear</Button>
-          <Button  onClick={()=>{
+          <button>Clear</button>
+          <button  onClick={()=>{
             lowleveluserdatasendaction();
 
-          }} >Enroll</Button>
+          }} >Enroll</button>
           </div>
         </div>
       </div>
