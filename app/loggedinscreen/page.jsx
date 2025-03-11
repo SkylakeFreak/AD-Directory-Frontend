@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
+import Loader from '@/pages/Loader';
 
  
 import { cn } from "@/lib/utils"
@@ -22,6 +23,7 @@ import {
 
 
 function Loggedinscreen({ }) {
+  const [frmpage,setfrmpage]=useState(false);
   const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
   const [loggedintime, setloggedintime] = useState("Loading...");
@@ -154,19 +156,42 @@ function Loggedinscreen({ }) {
   catch(err){
       
   }
+
+
+
+  //feeding fast for latency
+  
+
+  useEffect(()=>{
+    if (isAuthenticated===null){
+      setfrmpage(false);
+    }
+    else{
+      setfrmpage(true);
+    }
+
+  },[isAuthenticated,currentuser])
+
+
 }
 
 
 
-  if (isAuthenticated === null) {
-    return <div className='h-screen bg-black text-white'>Loading..</div>;
+  if (!frmpage) {
+    return <div className='h-screen bg-black text-white'>
+      <Loader/>
+    </div>;
+
+
+
   }
+
 
 
   
 
   return (
-    <div className={`flex  ${isAuthenticated!==null ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
+    <div className={`flex  ${!frmpage ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
       <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
@@ -194,7 +219,7 @@ function Loggedinscreen({ }) {
      
 
 
-     {logoutpopup && <div className='absolute w-full transition-all duration-100 flex items-center justify-center mt-40'>
+     <div className={` ${logoutpopup?"flex":"hidden"} absolute w-full transition-all duration-100 flex items-center justify-center mt-40`}>
       
       <div className='bg-gray-200 flex flex-col gap-5 items-center justify-center w-80 h-80'>
         <div className='flex items-center w-80 p-1   absolute top-0 justify-end'>
@@ -217,7 +242,7 @@ function Loggedinscreen({ }) {
       </div>
     
       
-     </div>}
+     </div>
 
    
 

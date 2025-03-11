@@ -28,7 +28,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
     }} onMouseEnter={()=>{
       setglow(true)
 
-    }}  className={`flex transition-all fade-in shadow-2xl duration-85 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-[#EEEEEE]  text-xl md:max-w-[40vh]' : 'bg-[#181818] opacity-90 text-white w-full   outline outline-none  min-h-[50vh] text-lg'} ${glow ? 'h-auto  min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
+    }}  className={`flex transition-all fade-in shadow-2xl duration-85 w-full max-w-[80vw] items-center justify-center sm:max-w-[22vw] md:max-w-[40vh] p-5 rounded-md hover:cursor-pointer flex-col ${glow ? 'bg-[#ffffff]  text-xl md:max-w-[40vh]' : 'bg-[#181818] opacity-90 text-white w-full   outline outline-none  min-h-[50vh] text-lg'} ${glow ? 'h-auto  min-h-[50vh] ' : ''}   items-center h-[500px] outline outline-1`}>
         <p className={`${!glow ? ' flex items-center justify-center h-full mt-10 mb-5 text-2xl animate-pulse' : 'text-2xl font-semibold'}`}>{mainscreentext}</p>
         
         <div className={` ${glow ? 'hidden' : ''} flex gap-x-4 flex-row`}>

@@ -31,9 +31,9 @@
 }
 
 @keyframes bg {
-  0% { background: rgb(31, 82, 116); }
-  100% { background: rgb(32, 46, 37); }
-  100% { background: rgb(0, 0, 0); }
+  0% { background: rgb(22, 29, 45); }
+  50% { background: rgb(0, 0, 0); }
+  100% { background: rgb(36, 15, 20); }
 }
 
 /* Apply animations in Tailwind */
@@ -42,6 +42,12 @@
     animation: orbit 5.5s infinite;
   }
   .animate-bg {
-    animation: bg 16s ease-in alternate infinite;
+    animation: bg 4s ease-in alternate infinite;
   }
+}
+
+/* global.css */
+body {
+  @apply bg-black; /* Ensures black background globally */
+  transition: background-color 0.3s ease-in-out; /* Smooth transition */
 }
