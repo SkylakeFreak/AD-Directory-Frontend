@@ -244,33 +244,33 @@ useEffect(()=>{
           <input onChange={(e)=>{
             setname(e.target.value)
 
-          }} className='text-white bg-black m-1' type="text" placeholder='Name of the Employee' />
+          }} required className='text-gray-300 outline outline-none hover:p-2 transition-all duration-100 bg-black m-1 p-1 text-center rounded-sm' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM: {nameofemployee+"@AD.com"}</p>
           <input onChange={(e)=>{
             setphone(e.target.value)
 
-          }} className='text-white bg-black m-1' type="tel" placeholder='Phone Number' />
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="tel" placeholder='Phone Number' />
           <input onChange={(e)=>{
             setemail(e.target.value)
 
-          }} className='text-white bg-black m-1' type="email" placeholder='Personal Email ID' />
-          <input onChange={(e)=>{
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="email" placeholder='Personal Email ID' />
+          <input className='text-gray-300 bg-gray-500  hover:p-2 text-center p-1 transition-all m-1 duration-100' onChange={(e)=>{
             setDate(e.target.value)
 
           }}   type="date" />
           <input onChange={(e)=>{
             setgender(e.target.value)
 
-          }} className='text-white bg-black m-1' type="text" placeholder='Gender' />
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Gender' />
 
           <input onChange={(e)=>{
             setdesignation(e.target.value)
 
-          }} className='text-white bg-black m-1' type="text" placeholder='Designation' />
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Designation' />
           <input onChange={(e)=>{
             setdepartment(e.target.value)
 
-          }} className='text-white bg-black m-1' type="text" placeholder='Department' />
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Department' />
           <div className='flex flex-row justify-between'>
           <button>Clear</button>
           <button  onClick={()=>{
