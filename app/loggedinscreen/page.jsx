@@ -165,7 +165,7 @@ useEffect(()=>{
 
   if (!frmpage) {
     return <div className='h-screen bg-black text-white'>
-      <Loader/>
+      <Loader text={"Syncing Servers..."}/>
     </div>;
   }
 

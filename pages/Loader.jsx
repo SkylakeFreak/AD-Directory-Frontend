@@ -1,11 +1,14 @@
 import React from 'react'
 
-function Loader() {
+function Loader({text}) {
   return (
-    <div className="flex justify-center w-screen items-center h-screen bg-blue-500 animate-bg">
+    <div className="flex justify-center w-screen items-center h-screen bg-blue-500 gap-5 animate-bg">
+      <p className='text-white font-semibold'>{text}</p>
       <div className="relative w-14 h-14">
+
         {/* Background */}
         <div className="absolute w-20 h-20 -ml-4 -mt-4 rounded-lg bg-blue-500 opacity-70 animate-bg"></div>
+        
 
         {/* Loader Circles */}
         {[...Array(5)].map((_, i) => (

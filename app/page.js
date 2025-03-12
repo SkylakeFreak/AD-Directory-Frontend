@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="relative bg-black h-screen">
       <div className={`h-screen ${!loadingstate?"hidden":"flex"} items-center justify-center`}>
-        <Loader/>
+        <Loader text={"Launching Site..."}/>
       </div>
       <div className={`${loadingstate?"hidden":"relative"} h-screen`}>
       <Image className="absolute w-full h-full" src={img2} alt=""/>
