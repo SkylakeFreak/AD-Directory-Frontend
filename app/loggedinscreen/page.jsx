@@ -95,6 +95,14 @@ function Loggedinscreen({ }) {
   
       const result1 = await response1.json();
       console.log(result1.message, "test");
+      if (result1.message){
+        sethowhot(false)
+          setnotificationstring("Not Scanned the QR.")
+      }
+      else{
+        sethowhot(true)
+          setnotificationstring("Clearing the Cookie.")
+      }
   
       setlogoutredgreenstatus(result1.message);
   
@@ -110,6 +118,8 @@ function Loggedinscreen({ }) {
   
         if (result2.message === true) {
           console.log("Cleared the cookie successfully");
+          sethowhot(true)
+          setnotificationstring("Cookie Cleared.")
           router.push("/");
         } else {
           console.log("Some error occurred");
@@ -259,9 +269,9 @@ useEffect(() => {
 
      <div className={` ${logoutpopup?"flex":"hidden"} absolute w-full transition-all duration-100 flex items-center justify-center mt-40`}>
       
-      <div className='bg-gray-200 flex flex-col gap-5 items-center justify-center w-80 h-80'>
+      <div className='bg-gray-300 bg-opacity-60 flex flex-col gap-5 items-center justify-center w-80 h-80'>
         <div className='flex items-center w-80 p-1   absolute top-0 justify-end'>
-        <button className='outline outline-1 p-1 m-1 hover:bg-gray-300' onClick={()=>{
+        <button className='outline outline-1 p-1 m-1 bg-gray-800' onClick={()=>{
         setlogoutpopup(false)
       }}>Cancel</button>
         </div>
