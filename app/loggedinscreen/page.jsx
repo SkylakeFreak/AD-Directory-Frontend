@@ -3,16 +3,17 @@ import React, { useEffect, useState,useRef } from 'react';
 import { useRouter } from "next/navigation";
 import {QRCodeSVG} from 'qrcode.react';
 import Loader from '@/pages/Loader';
+import Notification from '@/Components/Notification';
 
 
 function Loggedinscreen({ }) {
   const [frmpage,setfrmpage]=useState(false);
   const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
-  const [loggedintime, setloggedintime] = useState("Loading...");
+  const [loggedintime, setloggedintime] = useState(new Date());
   const [currentuser,setcurrentuser]=useState("loading...")
   const [currentorg,setcurrentorg]=useState("loading...")
-  const [autologouttime, setautologouttime] = useState("Loading...");
+  const [autologouttime, setautologouttime] = useState("");
   const [currentsystemtiming, setcurrentsystemtiming] = useState("Loading...");
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [logoutpopup,setlogoutpopup]=useState(false);
@@ -26,6 +27,8 @@ function Loggedinscreen({ }) {
   const [gender,setgender]=useState("");
   const [designation,setdesignation]=useState("");
   const [department,setdepartment]=useState("");
+  const [notificationString,setnotificationstring]=useState("");
+  const [howhot,sethowhot]=useState(true)
   
 
   
@@ -43,7 +46,7 @@ function Loggedinscreen({ }) {
         if (response.status === 200) {
           setIsAuthenticated(true);
           setloggedintime(new Date(result.ttl * 1000).toLocaleString());
-          setautologouttime(new Date(result.exp * 1000).toLocaleString());
+          setautologouttime(new Date(result.exp * 1000));
           setcurrentorg(result.org)
           setcurrentuser(result.name)
           setmodeoflogin(result.modeoflogin)
@@ -118,7 +121,8 @@ function Loggedinscreen({ }) {
     }
   };
 
-  const lowleveluserdatasendaction=async()=>{
+  const lowleveluserdatasendaction=async(e)=>{
+    e.preventDefault();
     var tweakedname=nameofemployee+"@AD.com"
     const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,category:"NonAdminLowlevel" };
 
@@ -134,7 +138,16 @@ function Loggedinscreen({ }) {
 
       const result = await response.json();
       console.log("LOW LEVEL USER ENROLLMENT",result);
-   
+      if (response.status==200){
+        sethowhot(true)
+        setnotificationstring("Success! New User Added")
+
+      }
+      else{
+        sethowhot(false)
+        setnotificationstring("Some Error Occured")
+
+      }
   }
   catch(err){
       
@@ -163,6 +176,47 @@ useEffect(()=>{
 
 
 
+
+useEffect(() => {
+
+  if (autologouttime!==""){
+    const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const total=(hours*60)+minutes
+
+  const targetTime = autologouttime;
+  const hours1=targetTime.getHours();
+  const minutes1=targetTime.getMinutes();
+  const total1=(hours1*60)+minutes1
+  const delay = total1-total; 
+  console.log(delay)
+
+
+  if (delay > 0) {
+    sethowhot(true)
+    setnotificationstring("Auto Disconnect Component Mounted! "+"Disconnect at: "+Math.abs(delay)*1000*60+" ms")
+    console.log(Math.abs(delay)*1000*60,"MS",Math.abs(delay),"Minutes");  
+    const timer = setTimeout(() => {
+      setIsAuthenticated(false);
+        router.push("/");
+        //activity to autologout
+    }, Math.abs(delay)*1000*60);
+    
+    return () => clearTimeout(timer);
+  }
+
+  }
+  else{
+    console.log("start empty")
+
+  }
+
+
+}, [autologouttime]);
+
+
+
   if (!frmpage) {
     return <div className='h-screen bg-black text-white'>
       <Loader text={"Syncing Servers..."}/>
@@ -175,6 +229,7 @@ useEffect(()=>{
 
   return (
     <div className={`flex  ${isAuthenticated===null ? "hidden":"block"}   relative flex-col bg-[#343434] h-screen text-white`}>
+      <Notification notificationString={notificationString} setnotifcationString={setnotificationstring} howhot={howhot}/>
       <div className='flex relative flex-row w-full  text-white'>
       <div className='flex flex-col w-full text-xl m-2 p-1'>
       <p>Welcome User: <span className='font-bold capitalize'>{currentuser}</span></p> 
@@ -187,7 +242,7 @@ useEffect(()=>{
       <div className='flex flex-col w-full items-end'> 
         <div className='m-2 p-1 outline outline-2'>
         <p className="">Logged in At: {loggedintime}</p>
-      <p>Auto-log Out At: {autologouttime}</p>
+      <p>Auto-log Out At: {autologouttime.toLocaleString()}</p>
       <p>System Timing: {currentsystemtiming}</p>
         </div>
         <button onClick={()=>{
@@ -240,44 +295,45 @@ useEffect(()=>{
 
       <div className='flex flex-col'>
         <p>CRUD Pause Enrollments</p>
-        <div className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col'>
+        <div className='flex'>
+          <form className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col' onSubmit={ lowleveluserdatasendaction}>
           <input onChange={(e)=>{
             setname(e.target.value)
 
           }} required className='text-gray-300 outline outline-none hover:p-2 transition-all duration-100 bg-black m-1 p-1 text-center rounded-sm' type="text" placeholder='Name of the Employee' />
           <p className="font-normal text-center">EMAIL AUTOFORM: {nameofemployee+"@AD.com"}</p>
-          <input onChange={(e)=>{
+          <input required onChange={(e)=>{
             setphone(e.target.value)
+            
 
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="tel" placeholder='Phone Number' />
-          <input onChange={(e)=>{
+          <input required onChange={(e)=>{
             setemail(e.target.value)
 
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="email" placeholder='Personal Email ID' />
-          <input className='text-gray-300 bg-gray-500  hover:p-2 text-center p-1 transition-all m-1 duration-100' onChange={(e)=>{
+          <input required className='text-gray-300 bg-gray-500  hover:p-2 text-center p-1 transition-all m-1 duration-100' onChange={(e)=>{
             setDate(e.target.value)
 
           }}   type="date" />
-          <input onChange={(e)=>{
+          <input required onChange={(e)=>{
             setgender(e.target.value)
 
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Gender' />
 
-          <input onChange={(e)=>{
+          <input required onChange={(e)=>{
             setdesignation(e.target.value)
 
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Designation' />
-          <input onChange={(e)=>{
+          <input required onChange={(e)=>{
             setdepartment(e.target.value)
 
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Department' />
           <div className='flex flex-row justify-between'>
-          <button>Clear</button>
-          <button  onClick={()=>{
-            lowleveluserdatasendaction();
-
-          }} >Enroll</button>
+          <button className='bg-gray-400 m-1 w-20 p-1 hover:bg-black'>Clear</button>
+          
+          <button type='submit' className='hover:bg-black bg-gray-400 m-1 w-20 p-1' >Enroll</button>
           </div>
+          </form>
         </div>
       </div>
 
