@@ -100,7 +100,7 @@ function Signinscreen({mainscreentext,status,connectionstring,orgname,setorgname
           setdomainname(e.target.value)
           settempdomainname(e.target.value)
         }} placeholder='Domain Name' className={`outline outline-none w-40 p-1 ${!signinupmode ? 'hidden' : ''} text-right `}  type="text" />
-        <span className='m-1'>@AD.com.</span> 
+        <span className='m-1'>@AD.com</span> 
         </div>
         
 </div>
