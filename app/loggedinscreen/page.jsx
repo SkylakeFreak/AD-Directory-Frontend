@@ -28,7 +28,152 @@ function Loggedinscreen({ }) {
   const [designation,setdesignation]=useState("");
   const [department,setdepartment]=useState("");
   const [notificationString,setnotificationstring]=useState("");
-  const [howhot,sethowhot]=useState(true)
+  const [howhot,sethowhot]=useState(true);
+  const [usertier,setusertier]=useState("");
+
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
+
+  const departmentRoles = {
+    QualityAssurance: [ // Added QA
+      { value: "QAEngineer", label: "Quality Assurance Engineer" },
+      { value: "TestAutomationEngineer", label: "Test Automation Engineer" },
+      { value: "PerformanceTester", label: "Performance Tester" },
+      { value: "ManualTester", label: "Manual Tester" },
+      { value: "SecurityTester", label: "Security Tester" },
+  ],
+    IT: [
+      { value: "ITAdministrator", label: "IT Administrator" },
+      { value: "NetworkEngineer", label: "Network Engineer" },
+      { value: "SystemAnalyst", label: "System Analyst" },
+      { value: "DatabaseAdministrator", label: "Database Administrator" },
+      { value: "CloudSupportEngineer", label: "Cloud Support Engineer" },
+      { value: "ITSupportSpecialist", label: "IT Support Specialist" },
+      { value: "HelpDeskTechnician", label: "Help Desk Technician" },
+      { value: "EnterpriseArchitect", label: "Enterprise Architect" },
+    ],
+    SoftwareDevelopment: [
+      { value: "SoftwareEngineer", label: "Software Engineer" },
+      { value: "FullStackDeveloper", label: "Full Stack Developer" },
+      { value: "FrontendDeveloper", label: "Frontend Developer" },
+      { value: "BackendDeveloper", label: "Backend Developer" },
+      { value: "GameDeveloper", label: "Game Developer" },
+      { value: "MobileAppDeveloper", label: "Mobile App Developer" },
+      { value: "EmbeddedSoftwareEngineer", label: "Embedded Software Engineer" },
+      { value: "SoftwareArchitect", label: "Software Architect" },
+    ],
+    Cybersecurity: [
+      { value: "SecurityAnalyst", label: "Security Analyst" },
+      { value: "PenetrationTester", label: "Penetration Tester" },
+      { value: "SOCAnalyst", label: "SOC Analyst" },
+      { value: "CyberSecurityConsultant", label: "Cyber Security Consultant" },
+      { value: "IncidentResponder", label: "Incident Responder" },
+      { value: "ForensicAnalyst", label: "Forensic Analyst" },
+      { value: "EthicalHacker", label: "Ethical Hacker" },
+    ],
+    DataScience: [
+      { value: "DataScientist", label: "Data Scientist" },
+      { value: "DataAnalyst", label: "Data Analyst" },
+      { value: "MachineLearningEngineer", label: "Machine Learning Engineer" },
+      { value: "BigDataEngineer", label: "Big Data Engineer" },
+      { value: "DataEngineer", label: "Data Engineer" },
+      { value: "AI_Researcher", label: "AI Researcher" },
+    ],
+    Blockchain: [
+      { value: "BlockchainDeveloper", label: "Blockchain Developer" },
+      { value: "CryptoAnalyst", label: "Cryptocurrency Analyst" },
+      { value: "SmartContractDeveloper", label: "Smart Contract Developer" },
+      { value: "NFTSpecialist", label: "NFT Specialist" },
+    ],
+    CloudComputing: [
+      { value: "CloudArchitect", label: "Cloud Architect" },
+      { value: "DevOpsEngineer", label: "DevOps Engineer" },
+      { value: "SiteReliabilityEngineer", label: "Site Reliability Engineer" },
+      { value: "CloudSecurityEngineer", label: "Cloud Security Engineer" },
+    ],
+    Medicine: [
+      { value: "Doctor", label: "Doctor" },
+      { value: "Surgeon", label: "Surgeon" },
+      { value: "Nurse", label: "Nurse" },
+      { value: "Dentist", label: "Dentist" },
+      { value: "Pharmacist", label: "Pharmacist" },
+      { value: "Physiotherapist", label: "Physiotherapist" },
+      { value: "Radiologist", label: "Radiologist" },
+      { value: "Veterinarian", label: "Veterinarian" },
+    ],
+    Finance: [
+      { value: "FinanceManager", label: "Finance Manager" },
+      { value: "Accountant", label: "Accountant" },
+      { value: "InvestmentAnalyst", label: "Investment Analyst" },
+      { value: "Auditor", label: "Auditor" },
+      { value: "FinancialPlanner", label: "Financial Planner" },
+    ],
+    Marketing: [
+      { value: "MarketingManager", label: "Marketing Manager" },
+      { value: "SEO_Specialist", label: "SEO Specialist" },
+      { value: "ContentWriter", label: "Content Writer" },
+      { value: "SocialMediaManager", label: "Social Media Manager" },
+      { value: "BrandManager", label: "Brand Manager" },
+    ],
+    HR: [
+      { value: "HRManager", label: "HR Manager" },
+      { value: "Recruiter", label: "Recruiter" },
+      { value: "TrainingCoordinator", label: "Training Coordinator" },
+      { value: "PayrollSpecialist", label: "Payroll Specialist" },
+    ],
+    Education: [
+      { value: "Teacher", label: "Teacher" },
+      { value: "Professor", label: "Professor" },
+      { value: "AcademicResearcher", label: "Academic Researcher" },
+      { value: "Librarian", label: "Librarian" },
+      { value: "Tutor", label: "Tutor" },
+    ],
+    Law: [
+      { value: "Lawyer", label: "Lawyer" },
+      { value: "Judge", label: "Judge" },
+      { value: "Paralegal", label: "Paralegal" },
+      { value: "LegalConsultant", label: "Legal Consultant" },
+    ],
+    Construction: [
+      { value: "CivilEngineer", label: "Civil Engineer" },
+      { value: "Architect", label: "Architect" },
+      { value: "ConstructionManager", label: "Construction Manager" },
+      { value: "Surveyor", label: "Surveyor" },
+    ],
+    ArtsAndEntertainment: [
+      { value: "Musician", label: "Musician" },
+      { value: "Actor", label: "Actor" },
+      { value: "FilmDirector", label: "Film Director" },
+      { value: "Photographer", label: "Photographer" },
+      { value: "GraphicDesigner", label: "Graphic Designer" },
+    ],
+    Journalism: [
+      { value: "Journalist", label: "Journalist" },
+      { value: "NewsAnchor", label: "News Anchor" },
+      { value: "Editor", label: "Editor" },
+      { value: "PublicRelationsOfficer", label: "Public Relations Officer" },
+    ],
+    Transportation: [
+      { value: "Pilot", label: "Pilot" },
+      { value: "TrainConductor", label: "Train Conductor" },
+      { value: "TruckDriver", label: "Truck Driver" },
+      { value: "MaritimeNavigator", label: "Maritime Navigator" },
+    ],
+    Sports: [
+      { value: "Athlete", label: "Athlete" },
+      { value: "Coach", label: "Coach" },
+      { value: "Referee", label: "Referee" },
+      { value: "SportsAnalyst", label: "Sports Analyst" },
+    ],
+    ScienceAndResearch: [
+      { value: "Physicist", label: "Physicist" },
+      { value: "Chemist", label: "Chemist" },
+      { value: "Biologist", label: "Biologist" },
+      { value: "Astronomer", label: "Astronomer" },
+      { value: "Geologist", label: "Geologist" },
+    ],
+};
+
   
 
   
@@ -134,7 +279,8 @@ function Loggedinscreen({ }) {
   const lowleveluserdatasendaction=async(e)=>{
     e.preventDefault();
     var tweakedname=nameofemployee+"@AD.com"
-    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,category:"NonAdminLowlevel" };
+    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,
+      category:"NonAdminLowlevel",selectedDepartment,selectedRole };
 
     try {
       const response = await fetch("https://ad-api-backend.vercel.app/lowleveluserenrollments", {
@@ -325,19 +471,65 @@ useEffect(() => {
             setDate(e.target.value)
 
           }}   type="date" />
-          <input required onChange={(e)=>{
+           <select onChange={(e)=>{
             setgender(e.target.value)
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' name="" id="">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
 
-          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Gender' />
 
-          <input required onChange={(e)=>{
+
+
+          <select onChange={(e)=>{
             setdesignation(e.target.value)
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' name="" id="">
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+          </select>
 
-          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Designation' />
-          <input required onChange={(e)=>{
-            setdepartment(e.target.value)
 
-          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' type="text" placeholder='Department' />
+          <select
+        onChange={(e) => {
+          setSelectedDepartment(e.target.value);
+          setSelectedRole(""); // Reset role when department changes
+        }}
+        className="text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1"
+      >
+        <option value="">Select Department</option>
+        {Object.keys(departmentRoles).map((dept) => (
+          <option key={dept} value={dept}>
+            {dept.replace(/([A-Z])/g, " $1").trim()} {/* Formats camelCase to words */}
+          </option>
+        ))}
+      </select>
+
+
+      {selectedDepartment && (
+        <select
+          onChange={(e) => setSelectedRole(e.target.value)}
+          className="text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1"
+        >
+          <option value="">Select Role</option>
+          {departmentRoles[selectedDepartment].map((role) => (
+            <option key={role.value} value={role.value}>
+              {role.label}
+            </option>
+          ))}
+        </select>
+      )}
+
+        <select onChange={(e)=>{
+            setusertier(e.target.value)
+          }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' name="" id="">
+            <option value="User">{"Trainee"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value="User">{"Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value="User">{"Senior-Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value="User">{"Lead"+"__"+selectedRole+"__"+selectedDepartment}</option>
+          </select>
+
+          
+          
           <div className='flex flex-row justify-between'>
           <button className='bg-gray-400 m-1 w-20 p-1 hover:bg-black'>Clear</button>
           
