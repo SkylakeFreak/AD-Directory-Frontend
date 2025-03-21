@@ -522,10 +522,10 @@ useEffect(() => {
         <select onChange={(e)=>{
             setusertier(e.target.value)
           }} className='text-gray-300 hover:p-2 text-center p-1 transition-all duration-100 bg-black m-1' name="" id="">
-            <option value="User">{"Trainee"+"__"+selectedRole+"__"+selectedDepartment}</option>
-            <option value="User">{"Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
-            <option value="User">{"Senior-Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
-            <option value="User">{"Lead"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value={"Trainee"+"__"+selectedRole+"__"+selectedDepartment}>{"Trainee"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value={"Associate"+"__"+selectedRole+"__"+selectedDepartment}>{"Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value={"Senior-Associate"+"__"+selectedRole+"__"+selectedDepartment}>{"Senior-Associate"+"__"+selectedRole+"__"+selectedDepartment}</option>
+            <option value={"Lead"+"__"+selectedRole+"__"+selectedDepartment}>{"Lead"+"__"+selectedRole+"__"+selectedDepartment}</option>
           </select>
 
           <p>User Tier:{usertier}</p>
