@@ -280,7 +280,7 @@ function Loggedinscreen({ }) {
     e.preventDefault();
     var tweakedname=nameofemployee+"@AD.com"
     const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,
-      category:"NonAdminLowlevel",selectedDepartment,selectedRole };
+      category:"NonAdminLowlevel",selectedDepartment,selectedRole,usertier };
 
     try {
       const response = await fetch("https://ad-api-backend.vercel.app/lowleveluserenrollments", {
