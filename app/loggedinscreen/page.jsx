@@ -528,6 +528,8 @@ useEffect(() => {
             <option value="User">{"Lead"+"__"+selectedRole+"__"+selectedDepartment}</option>
           </select>
 
+          <p>User Tier:{usertier}</p>
+
           
           
           <div className='flex flex-row justify-between'>
