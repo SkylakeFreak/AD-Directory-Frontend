@@ -279,7 +279,7 @@ function Loggedinscreen({ }) {
   const lowleveluserdatasendaction=async(e)=>{
     e.preventDefault();
     var tweakedname=nameofemployee+"@AD.com"
-    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,department,date,orgName:currentorg,adminname:tweakedname,
+    const data = {nameofemployee,personalemailid,phonenumber,gender,designation,date,orgName:currentorg,adminname:tweakedname,
       category:"NonAdminLowlevel",selectedDepartment,selectedRole,usertier };
 
     try {
