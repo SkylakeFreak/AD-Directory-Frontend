@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import {QRCodeSVG} from 'qrcode.react';
 import Loader from '@/pages/Loader';
 import Notification from '@/Components/Notification';
+import MyCalendar from '@/Components/Calender';
 
 
 function Loggedinscreen({ }) {
+
   const [frmpage,setfrmpage]=useState(false);
   const [logoutpopbutton,setlogoutpopbutton]=useState(false);
   const router = useRouter();
@@ -540,6 +542,7 @@ useEffect(() => {
           </form>
         </div>
       </div>
+      <MyCalendar />
 
      </div>
     </div>
