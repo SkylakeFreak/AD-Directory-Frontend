@@ -451,9 +451,11 @@ useEffect(() => {
         <p>Current Users Shows here:</p>
       </div>
 
-      <div className='flex flex-col'>
+      <div className='flex flex-row items-center justify-evenly'>
+
+        <div className='flex flex-col items-center justify-center'>
         <p>CRUD Pause Enrollments</p>
-        <div className='flex'>
+          
           <form className='flex gap-2 outline outline-1 w-80 p-2 m-2 outline-gray-400 flex-col' onSubmit={ lowleveluserdatasendaction}>
           <input onChange={(e)=>{
             setname(e.target.value)
@@ -541,8 +543,14 @@ useEffect(() => {
           </div>
           </form>
         </div>
-      </div>
-      <MyCalendar />
+        <div className='flex flex-col items-center justify-center gap-2'>
+        <p>Work Calender</p>
+        <MyCalendar />
+        </div>
+        
+      </div> 
+
+      
 
      </div>
     </div>
